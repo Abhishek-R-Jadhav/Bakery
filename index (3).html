@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VRABSOM | Industrial Software Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/deltha" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f9fc;
+      color: #1f2937;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #ffffff;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      min-height: 72px;
+    }
+
+    .brand-logo {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-family: 'Deltha', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #1d4ed8;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      color: #0f766e;
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      color: #1f2937 !important;
+      font-weight: 500;
+      margin-left: 1.2rem;
+    }
+
+    .nav-link:hover { color: #1d4ed8 !important; }
+
+    /* HAMBURGER */
+    .hamburger {
+      width: 34px;
+      height: 24px;
+      position: relative;
+      cursor: pointer;
+      display: none;
+    }
+
+    .hamburger span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #1d4ed8;
+      border-radius: 4px;
+      transition: 0.4s;
+    }
+
+    .hamburger span:nth-child(1){top:0}
+    .hamburger span:nth-child(2){top:10px}
+    .hamburger span:nth-child(3){top:20px}
+
+    .hamburger.active span:nth-child(1){
+      transform: rotate(45deg); top:10px;
+    }
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){
+      transform: rotate(-45deg); top:10px;
+    }
+
+    /* OFFCANVAS */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+      z-index: 1040;
+    }
+    .overlay.show {opacity:1; visibility:visible}
+
+    .offcanvas-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: linear-gradient(180deg,#ffffff,#eef4ff);
+      padding: 30px;
+      transition: .45s ease;
+      z-index: 1050;
+      box-shadow: -10px 0 40px rgba(0,0,0,.1);
+    }
+    .offcanvas-menu.show {right:0}
+
+    .offcanvas-menu a {
+      display:block;
+      margin-bottom:20px;
+      font-size:1.1rem;
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+    }
+
+    .offcanvas-menu a:hover {
+      color:#1d4ed8;
+      transform:translateX(6px);
+    }
+
+    section { padding:100px 0; }
+
+    .hero {
+      min-height:95vh;
+      display:flex;
+      align-items:center;
+      background: linear-gradient(135deg,#eef4ff,#f7fffd);
+    }
+
+    .section-title {
+      font-weight:700;
+      color:#1d4ed8;
+    }
+
+    .card {
+      border:none;
+      border-radius:18px;
+      box-shadow:0 12px 40px rgba(0,0,0,.06);
+      transition:.3s;
+    }
+
+    .card:hover { transform:translateY(-8px); }
+
+    .form-control {
+      background:#f1f5f9;
+      border:none;
+    }
+
+    footer {
+      background:#ffffff;
+      border-top:1px solid #e5e7eb;
+      padding:40px 0;
+      font-size:0.9rem;
+    }
+
+    footer a {
+      text-decoration:none;
+      color:#374151;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    footer a:hover { color:#1d4ed8; }
+
+    @media(max-width:991px){
+      .desktop-menu{display:none!important}
+      .hamburger{display:block}
+    }
+
+    /* 🔥 HIDE TEXT LOGO ON MOBILE */
+    @media(max-width:576px){
+      .brand-text{display:none;}
+      .brand-logo{height:40px;}
+    }
+
+    @media(min-width:992px){
+      .offcanvas-menu,.overlay{display:none}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar fixed-top px-3 px-lg-4">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <div class="d-flex align-items-center gap-2">
+      <img src="IMG-20260105-WA0003-removebg-preview.png" alt="VRABSOM Logo" class="brand-logo">
+      <div class="brand-text">
+        <div class="brand-title">VRABSOM Technologies</div>
+        <div class="brand-subtitle">COMMUNICATE • DECIDE • CREATE</div>
+      </div>
+    </div>
+
+    <div class="desktop-menu d-none d-lg-flex align-items-center">
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#why">Why Us</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
+
+    <div class="hamburger d-lg-none" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="offcanvas-menu" id="menu">
+  <a href="#home" class="menu-link">Home</a>
+  <a href="#services" class="menu-link">Services</a>
+  <a href="#about" class="menu-link">About</a>
+  <a href="#why" class="menu-link">Why Us</a>
+  <a href="#contact" class="menu-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h1>Reliable <span style="color:#1d4ed8">Industrial Software</span><br>for India</h1>
+        <p class="text-secondary mt-3">
+          Software solutions for factories, cold storage, warehouses & logistics.
+        </p>
+        <button class="btn btn-primary mt-3">Request Demo</button>
+      </div>
+      <div class="col-lg-6 text-center mt-5 mt-lg-0" data-aos="zoom-in">
+        <iframe
+          src="https://lottie.host/embed/f72da840-71b4-4bd8-b8c6-fdc532de8770/Km9fOKrC0E.lottie"
+          style="width:100%;max-width:420px;height:420px;border:none;">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title text-center" data-aos="fade-up">Our Services</h2>
+    <div class="row mt-5 g-4">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card p-4 h-100">
+          <h5>Cold Storage SaaS</h5>
+          <p class="text-secondary mt-2">
+            Temperature monitoring, stock tracking, expiry alerts and compliance-ready
+            software built for Indian cold storage facilities.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="card p-4 h-100">
+          <h5>Inventory Management</h5>
+          <p class="text-secondary mt-2">
+            Real-time inventory visibility, inward–outward tracking,
+            barcode support and low-bandwidth optimization.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card p-4 h-100">
+          <h5>Visitor Management</h5>
+          <p class="text-secondary mt-2">
+            Secure digital entry, visitor logs, gate passes and reports
+            designed for factories and industrial sites.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:#eef4ff;">
+  <div class="container text-center">
+    <h2 class="section-title" data-aos="fade-up">About Us</h2>
+    <p class="text-secondary mt-4 col-lg-8 mx-auto">
+      Vabsom Technologies builds reliable, scalable and affordable
+      industrial software tailored for Indian operating conditions.
+      Our solutions work seamlessly even in low bandwidth environments
+      and are designed for real on-ground industrial workflows.
+    </p>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container text-center">
+    <h2 class="section-title" data-aos="fade-up">Why Choose Us</h2>
+    <p class="text-secondary mt-4 col-lg-8 mx-auto">
+      We focus on simplicity, reliability and trust.
+      Our software is India-first, field-tested, easy to adopt
+      and backed by real support — not just dashboards.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:#eef4ff;">
+  <div class="container">
+    <h2 class="section-title text-center" data-aos="fade-up">Contact Us</h2>
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <input class="form-control mb-3 bg-white text-dark" placeholder="Your Name">
+        <input class="form-control mb-3 bg-white text-dark" placeholder="Business Email">
+        <textarea class="form-control mb-3 bg-white text-dark" rows="4" placeholder="Your Requirement"></textarea>
+        <button class="btn btn-primary w-100">Submit</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-4">
+        <strong>Vabsom Technologies</strong>
+        <p class="text-secondary mt-2">
+          Industrial SaaS solutions built for India.
+        </p>
+      </div>
+      <div class="col-md-2">
+        <strong>Company</strong>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="col-md-3">
+        <strong>Solutions</strong>
+        <a href="#">Cold Storage</a>
+        <a href="#">Inventory</a>
+        <a href="#">Visitor Management</a>
+      </div>
+      <div class="col-md-3">
+        <strong>Contact</strong>
+        <a href="#">info@vabsom.com</a>
+        <a href="#">+91 9XXXXXXXXX</a>
+      </div>
+    </div>
+    <div class="text-center mt-4 text-secondary">
+      © 2026 Vabsom Technologies · Made in India 🇮🇳
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once:true });
+
+  const hamburger=document.getElementById('hamburger');
+  const menu=document.getElementById('menu');
+  const overlay=document.getElementById('overlay');
+
+  function closeMenu(){
+    hamburger.classList.remove('active');
+    menu.classList.remove('show');
+    overlay.classList.remove('show');
+  }
+
+  hamburger.onclick=()=>{
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('show');
+    overlay.classList.toggle('show');
+  };
+  overlay.onclick=closeMenu;
+  document.querySelectorAll('.menu-link').forEach(l=>l.onclick=closeMenu);
+</script>
+
+</body>
+</html>

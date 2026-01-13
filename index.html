@@ -1,392 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>VRABSOM | Industrial Software Solutions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VABSOM INFOTECH | Innovative Digital Solutions</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0066cc; /* Bright Professional Blue */
+            --secondary-color: #ff8c00; /* Energetic Orange */
+            --light-bg: #f0f8ff; /* Alice Blue (Very light/Bright) */
+            --text-dark: #333333;
+        }
 
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/deltha" rel="stylesheet">
+        /* --- Navbar Styling --- */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f7f9fc;
-      color: #1f2937;
-    }
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+        }
 
-    h1, h2, h3 {
-      font-family: 'Poppins', sans-serif;
-    }
+        .brand-text-container {
+            line-height: 1.2;
+            margin-left: 10px;
+        }
 
-    /* NAVBAR */
-    .navbar {
-      background: #ffffff;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-      min-height: 72px;
-    }
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            display: block;
+            text-transform: uppercase;
+        }
 
-    .brand-logo {
-      height: 42px;
-      width: auto;
-      object-fit: contain;
-    }
+        .brand-tagline {
+            font-size: 0.75rem;
+            color: var(--secondary-color);
+            display: block;
+            font-weight: 400;
+        }
 
-    .brand-text {
-      line-height: 1.1;
-    }
+        /* --- Menu Link Hover Animation --- */
+        .nav-link {
+            font-weight: 600;
+            color: var(--text-dark) !important;
+            margin: 0 10px;
+            position: relative;
+            transition: 0.3s;
+        }
 
-    .brand-title {
-      font-family: 'Deltha', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #1d4ed8;
-    }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
 
-    .brand-subtitle {
-      font-size: 0.7rem;
-      color: #0f766e;
-      letter-spacing: 1px;
-    }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
-    .nav-link {
-      color: #1f2937 !important;
-      font-weight: 500;
-      margin-left: 1.2rem;
-    }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
 
-    .nav-link:hover { color: #1d4ed8 !important; }
+        /* --- CUSTOM ANIMATED HAMBURGER --- */
+        .navbar-toggler {
+            border: none;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            box-shadow: none !important;
+        }
 
-    /* HAMBURGER */
-    .hamburger {
-      width: 34px;
-      height: 24px;
-      position: relative;
-      cursor: pointer;
-      display: none;
-    }
+        .hamburger-bar {
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 3px 0;
+            transition: all 0.4s ease-in-out;
+            border-radius: 3px;
+            display: block;
+        }
 
-    .hamburger span {
-      position: absolute;
-      height: 3px;
-      width: 100%;
-      background: #1d4ed8;
-      border-radius: 4px;
-      transition: 0.4s;
-    }
+        /* Hover effect on hamburger */
+        .navbar-toggler:hover .hamburger-bar {
+            background-color: var(--secondary-color);
+            width: 35px;
+        }
 
-    .hamburger span:nth-child(1){top:0}
-    .hamburger span:nth-child(2){top:10px}
-    .hamburger span:nth-child(3){top:20px}
+        /* Animation when menu is OPEN (X state) */
+        .navbar-toggler[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
 
-    .hamburger.active span:nth-child(1){
-      transform: rotate(45deg); top:10px;
-    }
-    .hamburger.active span:nth-child(2){opacity:0}
-    .hamburger.active span:nth-child(3){
-      transform: rotate(-45deg); top:10px;
-    }
+        .navbar-toggler[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
 
-    /* OFFCANVAS */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.3);
-      opacity: 0;
-      visibility: hidden;
-      transition: .3s;
-      z-index: 1040;
-    }
-    .overlay.show {opacity:1; visibility:visible}
+        .navbar-toggler[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
 
-    .offcanvas-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 280px;
-      height: 100vh;
-      background: linear-gradient(180deg,#ffffff,#eef4ff);
-      padding: 30px;
-      transition: .45s ease;
-      z-index: 1050;
-      box-shadow: -10px 0 40px rgba(0,0,0,.1);
-    }
-    .offcanvas-menu.show {right:0}
+        /* --- Hero Section --- */
+        .hero-section {
+            background: linear-gradient(135deg, #ffffff 0%, var(--light-bg) 100%);
+            padding: 120px 0 80px 0;
+        }
 
-    .offcanvas-menu a {
-      display:block;
-      margin-bottom:20px;
-      font-size:1.1rem;
-      text-decoration:none;
-      color:#1f2937;
-      font-weight:500;
-    }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
 
-    .offcanvas-menu a:hover {
-      color:#1d4ed8;
-      transform:translateX(6px);
-    }
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
 
-    section { padding:100px 0; }
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-    .hero {
-      min-height:95vh;
-      display:flex;
-      align-items:center;
-      background: linear-gradient(135deg,#eef4ff,#f7fffd);
-    }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+        }
 
-    .section-title {
-      font-weight:700;
-      color:#1d4ed8;
-    }
+        .text-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-    .card {
-      border:none;
-      border-radius:18px;
-      box-shadow:0 12px 40px rgba(0,0,0,.06);
-      transition:.3s;
-    }
+        /* Cards & Services */
+        .service-card {
+            border: none;
+            border-radius: 15px;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            height: 100%;
+            border-bottom: 4px solid transparent;
+        }
 
-    .card:hover { transform:translateY(-8px); }
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--secondary-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
 
-    .form-control {
-      background:#f1f5f9;
-      border:none;
-    }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
 
-    footer {
-      background:#ffffff;
-      border-top:1px solid #e5e7eb;
-      padding:40px 0;
-      font-size:0.9rem;
-    }
+        /* Why Choose Us */
+        .why-box {
+            background: var(--primary-color);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+        }
 
-    footer a {
-      text-decoration:none;
-      color:#374151;
-      display:block;
-      margin-bottom:6px;
-    }
+        /* Process Steps */
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
 
-    footer a:hover { color:#1d4ed8; }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
 
-    @media(max-width:991px){
-      .desktop-menu{display:none!important}
-      .hamburger{display:block}
-    }
+        /* Industries Section */
+        .industry-item {
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+        }
 
-    /* 🔥 HIDE TEXT LOGO ON MOBILE */
-    @media(max-width:576px){
-      .brand-text{display:none;}
-      .brand-logo{height:40px;}
-    }
+        .industry-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
 
-    @media(min-width:992px){
-      .offcanvas-menu,.overlay{display:none}
-    }
-  </style>
+        footer {
+            background: #f8f9fa;
+            padding: 50px 0 20px 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 991.98px) {
+            .brand-text-container {
+                display: none !important; 
+            }
+            .hero-section {
+                padding: 100px 0 50px 0;
+                text-align: center;
+            }
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-link {
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar fixed-top px-3 px-lg-4">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Header / Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <!-- LOGO PNG -->
+                <img src="https://via.placeholder.com/150x150?text=V" alt="VABSOM Logo">
+                
+                <!-- Only visible on Desktop (Laptops/PC) -->
+                <div class="brand-text-container d-none d-lg-block">
+                    <span class="brand-name">VABSOM INFOTECH</span>
+                    <span class="brand-tagline">Innovative Digital Solutions for Growing Businesses</span>
+                </div>
+            </a>
 
-    <div class="d-flex align-items-center gap-2">
-      <img src="IMG-20260105-WA0003-removebg-preview.png" alt="VRABSOM Logo" class="brand-logo">
-      <div class="brand-text">
-        <div class="brand-title">VRABSOM Technologies</div>
-        <div class="brand-subtitle">COMMUNICATE • DECIDE • CREATE</div>
-      </div>
-    </div>
+            <!-- CUSTOM ANIMATED HAMBURGER BUTTON -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
 
-    <div class="desktop-menu d-none d-lg-flex align-items-center">
-      <a class="nav-link" href="#home">Home</a>
-      <a class="nav-link" href="#services">Services</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#why">Why Us</a>
-      <a class="nav-link" href="#contact">Contact</a>
-    </div>
-
-    <div class="hamburger d-lg-none" id="hamburger">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<div class="overlay" id="overlay"></div>
-
-<div class="offcanvas-menu" id="menu">
-  <a href="#home" class="menu-link">Home</a>
-  <a href="#services" class="menu-link">Services</a>
-  <a href="#about" class="menu-link">About</a>
-  <a href="#why" class="menu-link">Why Us</a>
-  <a href="#contact" class="menu-link">Contact</a>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6" data-aos="fade-right">
-        <h1>Reliable <span style="color:#1d4ed8">Industrial Software</span><br>for India</h1>
-        <p class="text-secondary mt-3">
-          Software solutions for factories, cold storage, warehouses & logistics.
-        </p>
-        <button class="btn btn-primary mt-3">Request Demo</button>
-      </div>
-      <div class="col-lg-6 text-center mt-5 mt-lg-0" data-aos="zoom-in">
-        <iframe
-          src="https://lottie.host/embed/f72da840-71b4-4bd8-b8c6-fdc532de8770/Km9fOKrC0E.lottie"
-          style="width:100%;max-width:420px;height:420px;border:none;">
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <h2 class="section-title text-center" data-aos="fade-up">Our Services</h2>
-    <div class="row mt-5 g-4">
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="card p-4 h-100">
-          <h5>Cold Storage SaaS</h5>
-          <p class="text-secondary mt-2">
-            Temperature monitoring, stock tracking, expiry alerts and compliance-ready
-            software built for Indian cold storage facilities.
-          </p>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
-        <div class="card p-4 h-100">
-          <h5>Inventory Management</h5>
-          <p class="text-secondary mt-2">
-            Real-time inventory visibility, inward–outward tracking,
-            barcode support and low-bandwidth optimization.
-          </p>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">Welcome to <span style="color:var(--primary-color)">VABSOM INFOTECH</span></h1>
+                    <p class="lead mb-4">Your ideas. Our technology. <span class="fw-bold text-success">Real results.</span></p>
+                    <p class="text-muted">We deliver reliable, scalable, and innovative digital solutions helping businesses streamline operations and grow faster.</p>
+                    <div class="mt-5">
+                        <a href="#contact" class="btn btn-primary btn-lg me-3">Get Started</a>
+                        <a href="#services" class="btn btn-outline-primary btn-lg">Our Services</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="zoom-in">
+                    <iframe src="https://lottie.host/embed/f72da840-71b4-4bd8-b8c6-fdc532de8770/Km9fOKrC0E.lottie" style="width:100%;max-width:420px;height:420px;border:none;"></iframe>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="card p-4 h-100">
-          <h5>Visitor Management</h5>
-          <p class="text-secondary mt-2">
-            Secure digital entry, visitor logs, gate passes and reports
-            designed for factories and industrial sites.
-          </p>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-5" id="about">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <h2 class="section-title">Who We Are</h2>
+                    <p>VABSOM INFOTECH is an India-based IT services and solutions provider founded with the vision of delivering high-quality, cost-effective, and customized software solutions. With strong technical expertise and industry experience, we support businesses in their digital transformation journey.</p>
+                    <p>We believe in long-term partnerships, transparency, and continuous improvement. Our solutions are designed to be secure, scalable, and aligned with real business needs.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 border-start border-4 border-primary bg-light">
+                                <h5 class="fw-bold">Our Mission</h5>
+                                <small>To provide innovative, reliable, and affordable IT solutions that improve productivity.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 border-start border-4 border-warning bg-light">
+                                <h5 class="fw-bold">Our Vision</h5>
+                                <small>To become a trusted technology partner by delivering exceptional service quality.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-5 bg-light rounded-4">
+                        <h3 class="mb-4 fw-bold">Our Core Values</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Quality & Reliability</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Customer-Centric Approach</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Innovation & Continuous Learning</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Transparency & Integrity</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Long-Term Relationships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" style="background:#eef4ff;">
-  <div class="container text-center">
-    <h2 class="section-title" data-aos="fade-up">About Us</h2>
-    <p class="text-secondary mt-4 col-lg-8 mx-auto">
-      Vrabsom Technologies builds reliable, scalable and affordable
-      industrial software tailored for Indian operating conditions.
-      Our solutions work seamlessly even in low bandwidth environments
-      and are designed for real on-ground industrial workflows.
-    </p>
-  </div>
-</section>
+    <!-- Services Section -->
+    <section class="py-5" id="services" style="background-color: var(--light-bg);">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h2 class="section-title text-center">Our Services</h2>
+                <p class="text-muted">Comprehensive IT solutions tailored to your specific business needs.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
+                        <h4 class="fw-bold">Website Design & Development</h4>
+                        <ul class="text-muted small">
+                            <li>Static & Dynamic Websites</li>
+                            <li>Corporate & Business Websites</li>
+                            <li>Custom Website Development</li>
+                            <li>Website Redesign & Maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="icon-box"><i class="fas fa-database"></i></div>
+                        <h4 class="fw-bold">Software & ERP Development</h4>
+                        <ul class="text-muted small">
+                            <li>ERP System Design & Development</li>
+                            <li>Inventory, Purchase, Sales & HR Modules</li>
+                            <li>Production & Machine Monitoring</li>
+                            <li>Custom Business Applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="icon-box"><i class="fas fa-globe"></i></div>
+                        <h4 class="fw-bold">Web Application Development</h4>
+                        <ul class="text-muted small">
+                            <li>Custom Web Applications</li>
+                            <li>Admin Panels & Dashboards</li>
+                            <li>Database Design & Integration</li>
+                            <li>API Development</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+                        <h4 class="fw-bold">Mobile App Development</h4>
+                        <ul class="text-muted small">
+                            <li>Android Applications</li>
+                            <li>Business Utility Apps</li>
+                            <li>App Maintenance & Support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="icon-box"><i class="fas fa-headset"></i></div>
+                        <h4 class="fw-bold">IT Consulting & Support</h4>
+                        <ul class="text-muted small">
+                            <li>IT Consulting & Planning</li>
+                            <li>System Analysis</li>
+                            <li>Software Maintenance</li>
+                            <li>Server & Database Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- WHY US -->
-<section id="why">
-  <div class="container text-center">
-    <h2 class="section-title" data-aos="fade-up">Why Choose Us</h2>
-    <p class="text-secondary mt-4 col-lg-8 mx-auto">
-      We focus on simplicity, reliability and trust.
-      Our software is India-first, field-tested, easy to adopt
-      and backed by real support — not just dashboards.
-    </p>
-  </div>
-</section>
+    <!-- Why Choose Us & Process -->
+    <section class="py-5" id="process">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <h2 class="section-title">Why Choose Us</h2>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                            <div><strong>Expertise:</strong> Experienced and professional approach.</div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                            <div><strong>Customization:</strong> Solutions as per business needs.</div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                            <div><strong>Pricing:</strong> Affordable pricing with quality delivery.</div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                            <div><strong>Communication:</strong> Transparent communication and support.</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <h2 class="section-title text-center text-lg-start">Our Process</h2>
+                    <div class="row g-3 mt-4">
+                        <div class="col-6 col-md-4 col-lg-2 ms-lg-auto">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <p class="small fw-bold">Requirement Analysis</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <p class="small fw-bold">Planning & Design</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <p class="small fw-bold">Development</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <p class="small fw-bold">Testing</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <div class="process-step">
+                                <div class="step-number">5</div>
+                                <p class="small fw-bold">Deployment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- CONTACT -->
-<section id="contact" style="background:#eef4ff;">
-  <div class="container">
-    <h2 class="section-title text-center" data-aos="fade-up">Contact Us</h2>
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-6">
-        <input class="form-control mb-3 bg-white text-dark" placeholder="Your Name">
-        <input class="form-control mb-3 bg-white text-dark" placeholder="Business Email">
-        <textarea class="form-control mb-3 bg-white text-dark" rows="4" placeholder="Your Requirement"></textarea>
-        <button class="btn btn-primary w-100">Submit</button>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Industries -->
+    <section class="py-5" style="background-color: #fff;">
+        <div class="container py-5">
+            <h2 class="section-title text-center mb-5">Industries We Serve</h2>
+            <div class="row text-center">
+                <div class="col-md-4 col-lg-2 col-6 offset-lg-1" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="industry-item shadow-sm">Manufacturing</div>
+                </div>
+                <div class="col-md-4 col-lg-2 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="industry-item shadow-sm">Engineering</div>
+                </div>
+                <div class="col-md-4 col-lg-2 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="industry-item shadow-sm">Trading</div>
+                </div>
+                <div class="col-md-4 col-lg-2 col-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="industry-item shadow-sm">SMEs</div>
+                </div>
+                <div class="col-md-4 col-lg-2 col-6" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="industry-item shadow-sm">Startups</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-4">
-        <strong>Vrabsom Technologies</strong>
-        <p class="text-secondary mt-2">
-          Industrial SaaS solutions built for India.
-        </p>
-      </div>
-      <div class="col-md-2">
-        <strong>Company</strong>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="col-md-3">
-        <strong>Solutions</strong>
-        <a href="#">Cold Storage</a>
-        <a href="#">Inventory</a>
-        <a href="#">Visitor Management</a>
-      </div>
-      <div class="col-md-3">
-        <strong>Contact</strong>
-        <a href="#">info@vrabsom.com</a>
-        <a href="#">+91 9XXXXXXXXX</a>
-      </div>
-    </div>
-    <div class="text-center mt-4 text-secondary">
-      © 2026 Vrabsom Technologies · Made in India 🇮🇳
-    </div>
-  </div>
-</footer>
+    <!-- Contact Us Section -->
+    <section class="py-5" id="contact" style="background-color: var(--light-bg);">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="mb-5">Let’s discuss how we can help your business grow with the right technology solutions.</p>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-box mb-0 me-3"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Location</h6>
+                            <span>India</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-box mb-0 me-3"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Email</h6>
+                            <span>info@vabsom.com</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box mb-0 me-3"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Phone</h6>
+                            <span>+91-XXXXXXXXXX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-0 shadow p-4 rounded-4">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Name</label>
+                                <input type="text" class="form-control" placeholder="Enter your name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email</label>
+                                <input type="email" class="form-control" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Message</label>
+                                <textarea class="form-control" rows="4" placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button class="btn btn-primary w-100 py-3">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ once:true });
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© 2026 <strong>VABSOM INFOTECH</strong>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <small class="text-muted">Website Design | Software Development | Web & Mobile Apps | IT Services</small>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-  const hamburger=document.getElementById('hamburger');
-  const menu=document.getElementById('menu');
-  const overlay=document.getElementById('overlay');
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out'
+        });
 
-  function closeMenu(){
-    hamburger.classList.remove('active');
-    menu.classList.remove('show');
-    overlay.classList.remove('show');
-  }
-
-  hamburger.onclick=()=>{
-    hamburger.classList.toggle('active');
-    menu.classList.toggle('show');
-    overlay.classList.toggle('show');
-  };
-  overlay.onclick=closeMenu;
-  document.querySelectorAll('.menu-link').forEach(l=>l.onclick=closeMenu);
-</script>
-
+        // Auto-close menu on click and handle aria-expanded for animation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                if (navbarCollapse.classList.contains('show')) {
+                    new bootstrap.Collapse(navbarCollapse).hide();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
